@@ -4,6 +4,19 @@
 # 《自然语言处理入门》2.3.1 完全切分
 # 配套书籍：http://nlp.hankcs.com/book.php
 # 讨论答疑：https://bbs.hankcs.com/
+import os
+import sys
+
+folders = os.path.abspath(__file__ if '__file__' in globals() else '.').split(os.path.sep)
+try:
+    index = folders.index('tests')
+    # 将tests放入path中，并且排除IPython/extensions下面的tests
+    sys.path = [os.path.sep.join(folders[:index])] + [x for x in sys.path if 'IPython' not in x]
+    from tests.test_utility import ensure_data
+except ValueError:
+    print('找不到tests目录，请将本文件放到tests下的任意子目录中运行')
+    exit(1)
+
 from tests.book.ch02.utility import load_dictionary
 
 
